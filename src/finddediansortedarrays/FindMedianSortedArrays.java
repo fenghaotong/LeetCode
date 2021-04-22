@@ -2,8 +2,8 @@ package finddediansortedarrays;
 
 public class FindMedianSortedArrays {
     public static void main(String[] args) {
-        int[] nums1 = {1};
-        int[] nums2 = {2,3,4};
+        int[] nums1 = {1,2,3};
+        int[] nums2 = {3,4};
         System.out.println(findMedianSortedArrays(nums1, nums2));
     }
     public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -65,46 +65,38 @@ public class FindMedianSortedArrays {
             }
         }
         if ((nums1.length + nums2.length) % 2 == 0) {
-            while(i < nums1.length || j < nums2.length){
-                if (i < nums1.length) {
-                    if ((i + j) == position - 1) {
-                        count += nums1[i];
-                    }
-                    if ((i + j) == position) {
-                        count += nums1[i];
-                        return (double) count / 2;
-                    }
-                    i++;
+            for (; i < nums1.length; i++) {
+                if ((i + j) == position - 1) {
+                    count += nums1[i];
                 }
-                if(j < nums2.length) {
-                    if ((i + j) == position - 1) {
-                        count += nums2[j];
-                    }
-                    if ((i + j) == position) {
-                        count += nums2[j];
-                        return (double) count / 2;
-                    }
-                    j ++;
+                if ((i + j) == position) {
+                    count += nums1[i];
+                    return (double) count / 2;
                 }
             }
+
+            for (; j < nums2.length; j ++) {
+                if ((i + j) == position - 1) {
+                    count += nums2[j];
+                }
+                if ((i + j) == position) {
+                    count += nums2[j];
+                    return (double) count / 2;
+                }
+            }
+
         } else {
-            while(i < nums1.length || j < nums2.length){
-                if (i < nums1.length) {
-                    if ((i + j) == position) {
-                        return  (double) nums1[i];
-                    }
-                    i ++;
-                }
-                if (j < nums2.length) {
-                    if ((i + j) == position) {
-                        return  (double) nums2[j];
-                    }
-                    j ++;
+            for (; i < nums1.length; i++) {
+                if ((i + j) == position) {
+                    return  (double) nums1[i];
                 }
             }
-
+            for (; j < nums2.length; j ++) {
+                if ((i + j) == position) {
+                    return  (double) nums2[j];
+                }
+            }
         }
-
         return 0.0;
     }
 }
